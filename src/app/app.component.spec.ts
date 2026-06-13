@@ -14,16 +14,23 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'loja' title`, () => {
+  it('should expose the official store URL', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('loja');
+    expect(app.storeUrl).toBe(
+      'https://www.mercadolivre.com.br/pagina/eletome'
+    );
   });
 
-  it('should render title', () => {
+  it('should render the redirect fallback', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, loja');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Abrindo a loja Eletome'
+    );
+    expect(compiled.querySelector<HTMLAnchorElement>('a')?.href).toBe(
+      'https://www.mercadolivre.com.br/pagina/eletome'
+    );
   });
 });
